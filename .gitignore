@@ -10,4 +10,5 @@ out
 gen
 
 ##
-preset/
+git rm --cached preset/ -r
+
