@@ -15,7 +15,7 @@
 
 <!--    parameterType 사용 시 1개의 값만 사용됨-->
 <!--    param1, param2 식으로 각각 넣는 법 있음 단 이방법은 해깔릴 수 있음-->
-    <select id="selectList" resultType="org.zerock.boardtest.domain.Board">
+    <select id="selectList" resultType="Board">
         select bno, title, content, writer
         from tbl_board
         order by bno desc
@@ -26,7 +26,7 @@
         delete from tbl_board where bno = #{bno}
     </delete>
 
-    <select id="selectOne" resultType="org.zerock.boardtest.domain.Board">
+    <select id="selectOne" resultType="Board">
         select * from tbl_board where bno = #{bno}
     </select>
 
