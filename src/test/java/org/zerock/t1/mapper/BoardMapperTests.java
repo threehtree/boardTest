@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.zerock.boardtest.domain.Board;
+import org.zerock.boardtest.dto.ListDTO;
 import org.zerock.boardtest.mapper.BoardMapper;
 
 import java.util.List;
@@ -28,7 +29,9 @@ public class BoardMapperTests {
 
     @Test
     public void testSelectList(){
-        List<Board> boardList = boardMapper.selectList(0,10);
+        ListDTO listDTO= new ListDTO();
+
+        List<Board> boardList = boardMapper.selectList(listDTO);
         boardList.forEach(board -> log.info(board));
     }
 

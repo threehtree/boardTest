@@ -2,6 +2,7 @@ package org.zerock.boardtest.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import org.zerock.boardtest.domain.Board;
+import org.zerock.boardtest.dto.ListDTO;
 
 import java.util.List;
 
@@ -9,7 +10,8 @@ public interface GenericMapper <E,K> {
 
     void insert(E board);
 
-    List<Board> selectList(@Param("skip") int skip, @Param("size") int size);
+    //@Param("skip") int skip, @Param("size") int size
+    List<Board> selectList(ListDTO listDTO);
 
     void delete(K bno);
 
