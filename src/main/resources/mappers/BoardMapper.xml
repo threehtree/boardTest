@@ -5,6 +5,24 @@
 
 <mapper namespace="org.zerock.boardtest.mapper.BoardMapper">
 
+    <sql id="search">
+        <where>
+            <if test="keyword != null">
+                <foreach collection="types" item="item" separator="OR" open="(" close=")">
+                    <if test='item == "t"'>
+                        title like concat('%',#{keyword},'%')
+                    </if>
+                    <if test='item == "c"'>
+                        content like concat('%',#{keyword},'%')
+                    </if>
+                    <if test='item == "w"'>
+                        writer like concat('%',#{keyword},'%')
+                    </if>
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
     <insert id="insert">
         <selectKey resultType="int" keyProperty="bno" order="AFTER">
             select last_insert_id()
@@ -13,30 +31,42 @@
         values(#{title},#{content},#{writer})
     </insert>
 
-<!--page maker에 사용할 총 숫자값 부름 *이런 식으로 하나 하나 sql 추가해서 부르는게 아닌 한번에 하는 방법 고민?-->
+    <!--page maker에 사용할 총 숫자값 부름 *이런 식으로 하나 하나 sql 추가해서 부르는게 아닌 한번에 하는 방법 고민?-->
     <select id="getTotal" resultType="int">
         select count(bno) from tbl_board
+        <include refid="search"></include>
     </select>
 
-<!--    parameterType 사용 시 1개의 값만 사용됨-->
-<!--    param1, param2 식으로 각각 넣는 법 있음 단 이방법은 해깔릴 수 있음-->
+    <!--    parameterType 사용 시 1개의 값만 사용됨-->
+    <!--    param1, param2 식으로 각각 넣는 법 있음 단 이방법은 해깔릴 수 있음-->
     <select id="selectList" resultType="Board">
         select bno, title, content, writer, regDate, updateDate
         from tbl_board
+
+        <include refid="search"></include>
+
         order by bno desc
         limit #{skip}, #{size}
     </select>
 
     <delete id="delete">
-        delete from tbl_board where bno = #{bno}
+        delete
+        from tbl_board
+        where bno = #{bno}
     </delete>
 
     <select id="selectOne" resultType="Board">
-        select * from tbl_board where bno = #{bno}
+        select *
+        from tbl_board
+        where bno = #{bno}
     </select>
 
     <update id="update">
-        update tbl_board set title = #{title}, content = #{content}, updateDate = now() where  bno = #{bno}
+        update tbl_board
+        set title      = #{title},
+            content    = #{content},
+            updateDate = now()
+        where bno = #{bno}
     </update>
 
 </mapper>

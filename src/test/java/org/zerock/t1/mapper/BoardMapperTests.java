@@ -30,7 +30,8 @@ public class BoardMapperTests {
     @Test
     public void testSelectList(){
         ListDTO listDTO= new ListDTO();
-
+        listDTO.setType("tcw");
+        listDTO.setKeyword("내");
         List<Board> boardList = boardMapper.selectList(listDTO);
         boardList.forEach(board -> log.info(board));
     }

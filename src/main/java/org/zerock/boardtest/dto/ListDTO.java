@@ -10,9 +10,32 @@ public class ListDTO {
     private int page;
     private int size;
 
+    //t tc tcw
+    private String type;
+    private String keyword;
+
     public ListDTO() {
         this.page = 1;
         this.size = 10;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String[] getTypes(){
+        if (type==null){
+            return new String[]{};
+        }
+        return type.split("");
+    }
+
+    public String getKeyword(){
+        return keyword == null ? null: keyword.trim();
     }
 
     public void setPage(int page) {
