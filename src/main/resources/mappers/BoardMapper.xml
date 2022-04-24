@@ -8,20 +8,21 @@
     <sql id="search">
         <where>
             <if test="keyword != null">
-                <foreach collection="types" item="item" separator="OR" open="(" close=")">
+                <foreach collection="types" item="item" separator=" OR " open="(" close=")">
                     <if test='item == "t"'>
-                        title like concat('%',#{keyword},'%')
+                        title like concat('%', #{keyword}, '%')
                     </if>
                     <if test='item == "c"'>
-                        content like concat('%',#{keyword},'%')
+                        content like concat('%', #{keyword}, '%')
                     </if>
                     <if test='item == "w"'>
-                        writer like concat('%',#{keyword},'%')
+                        writer like concat('%', #{keyword}, '%')
                     </if>
                 </foreach>
             </if>
         </where>
     </sql>
+
 
     <insert id="insert">
         <selectKey resultType="int" keyProperty="bno" order="AFTER">
@@ -39,15 +40,16 @@
 
     <!--    parameterType 사용 시 1개의 값만 사용됨-->
     <!--    param1, param2 식으로 각각 넣는 법 있음 단 이방법은 해깔릴 수 있음-->
-    <select id="selectList" resultType="Board">
-        select bno, title, content, writer, regDate, updateDate
+    <select id="selectList"  resultType="Board">
+        select bno,title,content,writer,regDate,updateDate
         from tbl_board
 
         <include refid="search"></include>
 
         order by bno desc
-        limit #{skip}, #{size}
+        limit #{skip},#{size}
     </select>
+
 
     <delete id="delete">
         delete
