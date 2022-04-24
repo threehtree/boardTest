@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: peter
@@ -13,10 +14,20 @@
 <body>
 
 
-    <h1>${listDTO}</h1>
-    <h1>${dtoList}</h1>
+    <h3>${listDTO.link}</h3>
 
     <h1>${pageMaker}</h1>
+
+    <ul>
+        <c:forEach items="${dtoList}" var="board">
+            <li>
+                <span> <a> ${board.bno} </a></span>
+                <span><a href='/board/read${listDTO.link}&bno=${board.bno}'>${board.title}</a></span>
+                <span>${board.content}</span>
+            </li>
+        </c:forEach>
+    </ul>
+
 
   <script>
 <%--   단순한 데이터 보내기 방식으로 할 시 param을 추가하여 받을 수 있게 해줌 단순한 방법   --%>
