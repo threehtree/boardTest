@@ -23,6 +23,15 @@ public class BoardController{
     //Service에서 의존성 주입 받도록 생성 -> @RequiredArgsConstructor
     private final BoardService boardService;
 
+    @GetMapping("/read/{bno}")
+    public String read(@PathVariable("bno") Long bno, ListDTO listDTO, Model model){
+
+        log.info("========================");
+        log.info(bno);
+        log.info(listDTO);
+        return "/board/read";
+    }
+
     @GetMapping("/")
     public String basic(){
         return "redirect:/board/list";
