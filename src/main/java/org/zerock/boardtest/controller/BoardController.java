@@ -23,7 +23,7 @@ public class BoardController{
     //Service에서 의존성 주입 받도록 생성 -> @RequiredArgsConstructor
     private final BoardService boardService;
 
-    @GetMapping("/read/{bno}")
+    @GetMapping("/read/{bno}")//배열로 보일 수 있어 다중 주소 파라미터 처리 가능 대신 조금 복잡해 질 수 있음
     public String read(@PathVariable("bno") Integer bno, ListDTO listDTO, Model model){
 
         log.info("========================");
@@ -31,6 +31,16 @@ public class BoardController{
         log.info(listDTO);
         model.addAttribute("dto", boardService.getOne(bno));
         return "/board/read";
+    }
+
+    @GetMapping("/modify/{bno}")
+    public String modifyGET(@PathVariable("bno") Integer bno, ListDTO listDTO, Model model){
+
+        log.info("========================");
+        log.info(bno);
+        log.info(listDTO);
+        model.addAttribute("dto", boardService.getOne(bno));
+        return "/board/modify";
     }
 
     @GetMapping("/")
@@ -77,6 +87,28 @@ public class BoardController{
         // 보내고 데이터 유지됨됨
        //        rttr.addAttribute("num",321);
 
+        return "redirect:/board/list";
+    }
+
+    @GetMapping("/remove/{bno}")
+    public String getNotSupported(){
+        return "redirect:/board/list";
+    }
+
+    @PostMapping("/remove/{bno}")
+    public String removePost(@PathVariable("bno") Integer bno,RedirectAttributes rttr){
+
+        log.info("------------------");
+        log.info("------------------");
+        log.info("remove"+bno);
+//        try{
+//            Thread.sleep(1000);
+//        }catch (InterruptedException e){
+//            e.printStackTrace();
+//        }
+        boardService.remove(bno);
+        log.info("------------------");
+        rttr.addFlashAttribute("result","removed");
         return "redirect:/board/list";
     }
 
