@@ -10,4 +10,8 @@ public interface BoardService {
 
 //    List<BoardDTO> getList(ListDTO listDTO); // 
     ListResponseDTO<BoardDTO>getList(ListDTO listDTO);
+
+    BoardDTO getOne(Integer bno);
+
+
 }

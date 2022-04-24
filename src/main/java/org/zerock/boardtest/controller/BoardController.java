@@ -24,11 +24,12 @@ public class BoardController{
     private final BoardService boardService;
 
     @GetMapping("/read/{bno}")
-    public String read(@PathVariable("bno") Long bno, ListDTO listDTO, Model model){
+    public String read(@PathVariable("bno") Integer bno, ListDTO listDTO, Model model){
 
         log.info("========================");
         log.info(bno);
         log.info(listDTO);
+        model.addAttribute("dto", boardService.getOne(bno));
         return "/board/read";
     }
 

@@ -36,4 +36,14 @@ public class BoardServiceImpl implements BoardService{
                 .total(boardMapper.getTotal(listDTO))
                 .build();
     }
+
+    @Override
+    public BoardDTO getOne(Integer bno) {
+
+        Board board = boardMapper.selectOne(bno);
+
+        BoardDTO boardDTO =modelMapper.map(board,BoardDTO.class);
+
+        return boardDTO;
+    }
 }

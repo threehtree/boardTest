@@ -68,12 +68,12 @@ public class ListDTO {
             builder.queryParam("type",type);
         }
         if (keyword !=null){
-            try {
-                String enStr = URLEncoder.encode("세종 대왕 만세","UTF-8");
-                builder.queryParam("keyword", enStr);
-            }catch (UnsupportedEncodingException e){
-                e.printStackTrace();
-            }
+//            try {
+//                String enStr = URLEncoder.encode("세종 대왕 만세","UTF-8");
+//                builder.queryParam("keyword", enStr);
+//            }catch (UnsupportedEncodingException e){
+//                e.printStackTrace();
+//            }
         }
         return builder.build().toString();
     }
