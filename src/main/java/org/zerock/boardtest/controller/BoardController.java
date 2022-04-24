@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.boardtest.dto.BoardDTO;
 import org.zerock.boardtest.dto.ListDTO;
+import org.zerock.boardtest.dto.ListResponseDTO;
+import org.zerock.boardtest.dto.PageMaker;
 import org.zerock.boardtest.service.BoardService;
 
 import java.util.List;
@@ -35,9 +37,14 @@ public class BoardController{
         log.info("board test............");
         log.info(listDTO );
 
-        List<BoardDTO> dtoList = boardService.getList(listDTO);
+//        List<BoardDTO> dtoList = boardService.getList(listDTO);
+        ListResponseDTO<BoardDTO> responseDTO = boardService.getList(listDTO);
 
-        model.addAttribute("dtoList",dtoList);
+        model.addAttribute("dtoList",responseDTO.getDtoList());
+
+        int total = responseDTO. getTotal();
+
+        model.addAttribute("pageMaker",new PageMaker(listDTO.getPage(),total));
 
     }
 

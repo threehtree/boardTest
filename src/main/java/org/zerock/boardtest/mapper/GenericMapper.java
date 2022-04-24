@@ -13,6 +13,8 @@ public interface GenericMapper <E,K> {
     //@Param("skip") int skip, @Param("size") int size
     List<Board> selectList(ListDTO listDTO);
 
+    int getTotal(ListDTO listDTO);
+
     void delete(K bno);
 
     Board selectOne(K bno);

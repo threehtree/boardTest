@@ -16,6 +16,8 @@
     <h1>${listDTO}</h1>
     <h1>${dtoList}</h1>
 
+    <h1>${pageMaker}</h1>
+
   <script>
 <%--   단순한 데이터 보내기 방식으로 할 시 param을 추가하여 받을 수 있게 해줌 단순한 방법   --%>
     <%--const result = ${param.result}--%>

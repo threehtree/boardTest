@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.zerock.boardtest.domain.Board;
 import org.zerock.boardtest.dto.BoardDTO;
 import org.zerock.boardtest.dto.ListDTO;
+import org.zerock.boardtest.dto.ListResponseDTO;
 import org.zerock.boardtest.mapper.BoardMapper;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class BoardServiceImpl implements BoardService{
     private final ModelMapper modelMapper;
 
     @Override
-    public List<BoardDTO> getList(ListDTO listDTO) {
+    public ListResponseDTO<BoardDTO> getList(ListDTO listDTO) {
         List<Board> boardList = boardMapper.selectList(listDTO); //.getSkip(),listDTO.getSize()
 
         // vo -> dto 타입으로 변화 추가
@@ -30,6 +31,9 @@ public class BoardServiceImpl implements BoardService{
                        .collect(Collectors.toList());
 
 
-        return dtoList;
+        return ListResponseDTO.<BoardDTO>builder()
+                .dtoList(dtoList)
+                .total(boardMapper.getTotal(listDTO))
+                .build();
     }
 }
