@@ -41,40 +41,41 @@ public class ListDTO {
 //        return type.split("");
 //    }
 
-    public String[] getTypes() {
-
-        if (type == null||type.trim().length() == 0) {
+    public String[] getTypes(){
+        if(type == null || type.trim().length() == 0){
             return new String[]{};
         }
         return type.split("");
     }
-    
+
     public String getKeyword(){
-        return keyword == null ? null: keyword.trim();
+
+        return keyword ==null  || keyword.trim().length() == 0 ? null: keyword.trim();
     }
 
     public void setPage(int page) {
-        this.page = page <= 0 ? 1 : page;
+        this.page = page <= 0? 1: page;
     }
+
 
     public void setSize(int size) {
         // 다중 상함 효력은 좋으나 가독성 나쁨
         //        this.size = size <10 ? 10 : size >= 1000 ? 10 : size;
-        this.size = size < 10 ? 10 : size;
+        this.size = size < 10? 10: size;
     }
 
     public int getSkip(){
-        return(this.page - 1) * size;
+        return (this.page - 1) * size;
     }
 
     public String getLink(){
 
         UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
-        builder.queryParam("page", getSize())
-                .queryParam("size",getSize());
+        builder.queryParam("page", getPage())
+                .queryParam("size", getSize());
 
         if(type != null){
-            builder.queryParam("type",type);
+            builder.queryParam("type", type);
         }
         if (keyword !=null){
 //            try {

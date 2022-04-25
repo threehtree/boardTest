@@ -33,15 +33,22 @@ public class BoardController{
         return "/board/read";
     }
 
-    @GetMapping("/modify/{bno}")
+    @GetMapping({"/modify/{bno}"})
     public String modifyGET(@PathVariable("bno") Integer bno, ListDTO listDTO, Model model){
 
-        log.info("========================");
+        log.info("=============================");
+
         log.info(bno);
+
         log.info(listDTO);
+
         model.addAttribute("dto", boardService.getOne(bno));
+
         return "/board/modify";
+
     }
+
+
 
     @GetMapping("/")
     public String basic(){
@@ -112,4 +119,21 @@ public class BoardController{
         return "redirect:/board/list";
     }
 
+    @PostMapping("/modify/{bno}")
+    public String removePost(@PathVariable("bno") Integer bno, BoardDTO boardDTO, ListDTO listDTO, RedirectAttributes rttr ){
+
+        log.info("----------------------");
+        log.info("----------------------");
+        boardDTO.setBno(bno);
+        log.info("modify" + boardDTO);
+
+        boardService.update(boardDTO);
+
+        rttr.addFlashAttribute("result", "modified");
+
+        log.info("----------------------");
+
+        return "redirect:/board/read/"+bno+ listDTO.getLink();
+
+    }
 }
