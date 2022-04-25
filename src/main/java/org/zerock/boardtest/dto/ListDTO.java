@@ -33,13 +33,22 @@ public class ListDTO {
         this.keyword = keyword;
     }
 
-    public String[] getTypes(){
-        if (type==null){
+    //아래 코드로 할 시 검색 조건이 걸려야만 페이지 넘어감
+//    public String[] getTypes(){
+//        if (type==null){
+//            return new String[]{};
+//        }
+//        return type.split("");
+//    }
+
+    public String[] getTypes() {
+
+        if (type == null||type.trim().length() == 0) {
             return new String[]{};
         }
         return type.split("");
     }
-
+    
     public String getKeyword(){
         return keyword == null ? null: keyword.trim();
     }
@@ -74,6 +83,14 @@ public class ListDTO {
 //            }catch (UnsupportedEncodingException e){
 //                e.printStackTrace();
 //            }
+
+            try {
+                String enStr = URLEncoder.encode(keyword, "UTF-8");
+                builder.queryParam("keyword", enStr);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
         }
         return builder.build().toString();
     }
