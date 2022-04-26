@@ -1,5 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+c
 <%--
   Created by IntelliJ IDEA.
   User: peter

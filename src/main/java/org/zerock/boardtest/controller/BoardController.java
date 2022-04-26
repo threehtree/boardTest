@@ -59,7 +59,7 @@ public class BoardController{
     //@RequestParam 디폴트 설정 및 주소 파라미터 자동 잡아주기 단 현재로서는 -100 같은 값을 주어도 그대로 되어버림 -> DTO 설정으로 이를 막음
     //public void list(@RequestParam(name = "page", defaultValue = "1", required = true) int page)
     //기본 자료형은 화면까지 전달 x -> @ModelAttribute(name = "cri") -> 특별한 데이터 자료 값을 지정하여 받을 떄 사용 3.0 이후 잘 안씀
-    // 대신 Model 사용 Service 계층 생성
+    //대신 Model 사용 Service 계층 생성
     public void list(ListDTO listDTO, Model model){
         log.info("board test............");
         log.info(listDTO );
@@ -86,10 +86,10 @@ public class BoardController{
         log.info("----------------------");
         log.info(boardDTO);
 
-        // 단순하게 파라미터 데이터 쏴주는 방벙
+        // 단순하게 파라미터 데이터 쏴주는 방법
 //        return "redirect:/board/list?result=123";
 
-        // 보내고 데이터 사라짐
+        // 보내고 데이터 사라짐 (반짝~)
         rttr.addFlashAttribute("result",123);
         // 보내고 데이터 유지됨됨
        //        rttr.addAttribute("num",321);
